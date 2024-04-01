@@ -1,6 +1,14 @@
-<input
-  type="text"
-  placeholder="Search GitHub username..."
-  [(ngModel)]="name"
-/>
-<button (click)="setData()">Установить данные</button>'
+
+
+<div class="search">
+  <label htmlFor="search" className="{styles.label}">
+    <img class="images" src="https://www.svgrepo.com/show/388517/search.svg" />
+  </label>
+  <input
+    class="textField"
+    type="text"
+    placeholder="Search GitHub username..."
+    [(ngModel)]="name"
+  />
+  <button class="btn" (click)="setData()">Search</button>
+</div>

@@ -1,3 +1,44 @@
-<div *ngIf="user">
-  {{user?.login}}
+<div *ngIf="isLoading">
+  Loading...
+</div>
+<div class="userCard" *ngIf="!isLoading && user">
+  <img [src]="user.avatar_url" class="avatar"/>
+  <div class="head">
+    <div class="created">{{user?.login}}</div>
+    <h1 class="created">{{user.created_at}}</h1>
+  </div>
+  <p *ngIf="user.bio" class="bio">
+      {{user.bio || 'This profile has no bio'}}
+  </p>
+  
+  <div class="info">
+    <div>
+      <div>Repos</div>
+      <div>{{user.public_repos}}</div>
+    </div>
+    <div>
+      <div>Following</div>
+      <div>{{user.following}}</div>
+    </div>
+    <div>
+      <div>Followers</div>
+      <div>{{user.followers}}</div>
+    </div>
+  </div>
+
+  <div>
+    <div>
+      <div>Location</div>
+      <div>{{user.location || 'Not Available'}}</div>
+    </div>
+    <div>
+      <div>Site</div>
+      <div>{{user.blog || 'Not Available'}}</div>
+    </div>
+    <div>
+      <div>Twitter</div>
+      <div>{{user.twitter_username || 'Not Available'}}</div>
+    </div>
+    
+  </div>
 </div>

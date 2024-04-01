@@ -1,8 +1,32 @@
-.wrapper {
-  height: auto;
-  padding: 20px;
-  width: 100%;
+// :root {
+//   --primary-color: gray; /* Цвет для темной темы */
+//   --secondary-color: #fff; /* Цвет для светлой темы */
+//   --text-color: #000000; 
+// }
+// .light {
+//   background-color: var(--primary-color);
+// }
 
-  flex-grow: 1;
-  box-sizing: border-box;
+// .dark {
+//   background-color: var(--secondary-color);
+// }
+// [data-theme="dark"] {
+//   background-color: #000000; /* Цвет фона для темной темы */
+ 
+// }
+
+.parent {
+  width: 100%;
+  height: 100vh;
+}
+.container {
+  width: 100%;
+  padding: 0 24px;
+
+  @media (min-width: 767px) {
+    width: 734px;
+    padding: 0;
+    margin: 0 auto;
+    margin-top: 40px;
+  }
 }

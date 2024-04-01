@@ -15,12 +15,51 @@ h4 {
   padding: 0;
   box-sizing: border-box;
 }
+:root {
+  --main-color: #0079FF;
+  --main-color-hover: #60ABFF;
 
-html,
-body,
-app-root {
-  height: 100%;
+  --white: #FFF;
+
+  --gray-50: #F6F8FF;
+  --gray-100: #697C9A;
+  --gray-200: #4B6A9B;
+  --gray-300: #2B3442;
+  --gray-400: #1E2A47;
+  --gray-500: #2f1426;
+
+  --error-color: #F74646;
+
+  --shadow: 0px 16px 30px -10px rgba(70, 96, 187, 0.198567);
 }
+
+body[data-theme="light"]{
+  background-color: #F6F8FF;
+  --textColor: black;
+  --search: white;
+  --bgInfo: #F6F8FF;
+}
+
+body[data-theme="dark"] {
+  background-color: #141C2F; 
+  --main-color: #ff794573;
+  --textColor: white;
+  --search: #1E2A47;
+  --bgInfo: #141D2F;
+ 
+}
+body[data-theme='light'] {
+  --info-color:  var(--gray-200);
+}
+
+body[data-theme='dark'] {
+  --info-color: var(--gray-500);
+}
+// app-root {
+//   height: 100%;
+//   background-color: #F6F8FF;
+// }
+
 
 app-root {
   display: flex;

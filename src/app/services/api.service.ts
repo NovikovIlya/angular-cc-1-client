@@ -31,7 +31,7 @@ export class ApiService {
   delete<T>(url: string, options: Options): Observable<T> {
     return this.httpClient.delete<T>(url, options) as Observable<T>;
   }
-  private data = new BehaviorSubject<string>('');
+  private data = new BehaviorSubject<string>('ilya');
 
   setData(data: string) {
     console.log(data);

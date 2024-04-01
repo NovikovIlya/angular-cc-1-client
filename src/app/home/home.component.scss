@@ -1,8 +1,59 @@
-.add-product-btn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 10;
+.userCard {
+  margin: 1.5rem 0 3rem;
+  width: 100%;
+  padding: 30px 24px 40px;
+  background-color: var(--search);
+ 
+  border-radius: 15px;
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  gap: 25px 20px;
 
-  box-shadow: 0 0 10px 2.5px rgba(0, 0, 0, 0.2);
+  &>*:nth-child(n + 3) {
+    grid-column: 1 / span 2;
+  }
+
+  @media (min-width: 767px) {
+    grid-template-columns: 120px 1fr;
+    padding: 40px;
+    gap: 30px 40px;
+  }
+
+  @media (min-width: 1024px) {
+    gap: 30px 40px;
+
+    &>*:nth-child(n + 2) {
+      grid-column: 2 / span 1;
+    }
+  }
+}
+
+.avatar {
+  border-radius: 50%;
+  max-width: 100%;
+}
+.head{
+  display: flex;
+  justify-content: space-between;
+}
+.created{
+  font-size: 16px;
+  color: var(--textColor);
+}
+.info{
+  display:flex;
+  justify-content: space-between;
+  color: var(--textColor);
+  background-color: var(--bgInfo);
+  padding: 15px 32px;
+  border-radius: 10px;
+}
+.bio {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--textColor);
+
+  &.empty {
+    opacity: 0.75;
+  }
 }

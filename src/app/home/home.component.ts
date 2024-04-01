@@ -29,14 +29,19 @@ export class HomeComponent {
 
   user: any = {};
   name: string | undefined = '';
+  isLoading:boolean = true;
 
   fetchProducts(name: any) {
+    this.isLoading = true;
     this.productsService
       .getProducts(`https://api.github.com/users/${name}`)
       .subscribe({
         next: (data: any) => {
           this.user = data;
+          this.isLoading = false;
+          console.log(this.user)
         },
+        
         error: (error) => {
           console.log(error);
         },
@@ -44,10 +49,11 @@ export class HomeComponent {
   }
 
   ngOnInit() {
-    this.fetchProducts('ilya');
+    
     this.apiService.getData().subscribe((name: string) => {
       this.name = name;
       this.fetchProducts(name);
     });
+    // this.fetchProducts('ilya');
   }
 }
