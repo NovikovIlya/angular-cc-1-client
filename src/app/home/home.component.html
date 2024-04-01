@@ -1,46 +1,49 @@
-<div *ngIf="isLoading">
-  Loading...
-</div>
+<div *ngIf="isLoading">Loading...</div>
 <div class="userCard" *ngIf="!isLoading && user">
-  <img [src]="user.avatar_url" class="avatar"/>
+  <img [src]="user.avatar_url" class="avatar" />
   <div class="head">
-    <div class="created">{{user?.name}}</div>
-    <h1 class="created2">{{joinedDate}}</h1>
-    <div class="created3">{{'@' + user.login}}</div>
+    <div class="created">{{ user?.name }}</div>
+    <h1 class="created2">{{ joinedDate }}</h1>
+    <div class="created3">{{ "@" + user.login }}</div>
   </div>
-  
+
   <p *ngIf="user.bio" class="bio">
-      {{user.bio || 'This profile has no bio'}}
+    {{ user.bio || "This profile has no bio" }}
   </p>
-  
+
   <div class="info">
     <div>
       <div>Repos</div>
-      <div>{{user.public_repos}}</div>
+      <div>{{ user.public_repos }}</div>
     </div>
     <div>
       <div>Following</div>
-      <div>{{user.following}}</div>
+      <div>{{ user.following }}</div>
     </div>
     <div>
       <div>Followers</div>
-      <div>{{user.followers}}</div>
+      <div>{{ user.followers }}</div>
     </div>
   </div>
 
   <div class="infoTwo">
-    <div>
-      <div>Location</div>
-      <div>{{user.location || 'Not Available'}}</div>
+    <div >
+      <div class="soc">
+        <img src="../../assets/icon-location.svg" />
+        <span>{{ user.location || "Not Available" }}</span>
+      </div>
     </div>
-    <div>
-      <div>Site</div>
-      <div>{{user.blog || 'Not Available'}}</div>
+    <div >
+      <div class="soc">
+        <img src="../../assets/icon-website.svg" />
+        <span>{{ user.blog || "Not Available" }}</span>
+      </div>
     </div>
-    <div>
-      <div>Twitter</div>
-      <div>{{user.twitter_username || 'Not Available'}}</div>
+    <div >
+      <div class="soc">
+        <img src="../../assets/icon-twitter.svg" />
+        <span>{{ user.twitter_username || "Not Available" }}</span>
+      </div>
     </div>
-    
   </div>
 </div>

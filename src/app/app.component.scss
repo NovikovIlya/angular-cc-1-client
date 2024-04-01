@@ -37,5 +37,16 @@
   padding: 15px;
 }
 .textHead{
-  color:var(--textColor)
+  color:var(--textColor);
+  cursor:default;
+}
+.textHead2{
+  color:var(--textColor);
+  cursor: pointer;
+}
+
+.hed{
+  display:flex;
+  gap:5px;
+  user-select: none ;
 }

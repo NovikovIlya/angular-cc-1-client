@@ -9,9 +9,5 @@ export const routes: Routes = [
     component: HomeComponent,
   },
   // A route to the about us page (module)
-  {
-    path: 'about-us',
-    loadChildren: () =>
-      import('./modules/about-us/about-us.module').then((m) => m.AboutUsModule),
-  },
+  
 ];
