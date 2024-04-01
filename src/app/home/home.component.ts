@@ -30,7 +30,7 @@ export class HomeComponent {
   user: any = {};
   name: string | undefined = '';
   isLoading:boolean = true;
-
+  joinedDate = ''
   fetchProducts(name: any) {
     this.isLoading = true;
     this.productsService
@@ -39,6 +39,7 @@ export class HomeComponent {
         next: (data: any) => {
           this.user = data;
           this.isLoading = false;
+          this.joinedDate = this.localDate.format(new Date(this.user.created_at));
           console.log(this.user)
         },
         
@@ -48,11 +49,18 @@ export class HomeComponent {
       });
   }
 
+  localDate = new Intl.DateTimeFormat('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  });
+  
   ngOnInit() {
     
     this.apiService.getData().subscribe((name: string) => {
       this.name = name;
       this.fetchProducts(name);
+      
     });
     // this.fetchProducts('ilya');
   }

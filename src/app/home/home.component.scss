@@ -33,12 +33,20 @@
   max-width: 100%;
 }
 .head{
-  display: flex;
-  justify-content: space-between;
+ display: grid;
+ grid-template-columns: 1fr 1fr;
 }
 .created{
+  font-size: 20px;
+  color: var(--textColor);
+}
+.created2{
   font-size: 16px;
   color: var(--textColor);
+  justify-self: end;
+}
+.created3{
+  color:#095FC5;
 }
 .info{
   display:flex;
@@ -47,6 +55,12 @@
   background-color: var(--bgInfo);
   padding: 15px 32px;
   border-radius: 10px;
+}
+.infoTwo{
+  color: var(--textColor);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap:10px;
 }
 .bio {
   font-size: 1rem;
