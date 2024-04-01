@@ -10,12 +10,8 @@ export class ProductsService {
   constructor(private apiService: ApiService) {}
 
   // Getting products from the API
-  getProducts = (
-    url: string,
-    params: PaginationParams
-  ): Observable<Products> => {
-    return this.apiService.get(url, {
-      params,
+  getProducts = (   name: string ): Observable<any> => {
+    return this.apiService.get(name, {
       responseType: 'json',
     });
   };

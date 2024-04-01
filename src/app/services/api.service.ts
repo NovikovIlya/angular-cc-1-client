@@ -1,17 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Options, Product } from '../../types';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
+  getNameObservable() {
+    throw new Error('Method not implemented.');
+  }
   constructor(private httpClient: HttpClient) {}
 
   // Used to make a GET request to the API
   get<T>(url: string, options: Options): Observable<T> {
-    return this.httpClient.get<T>(url, options) as Observable<T>;
+    return this.httpClient.get<T>(url) as Observable<T>;
   }
 
   // Used to make a POST request to the API
@@ -27,5 +30,16 @@ export class ApiService {
   // Used to make a DELETE request to the API
   delete<T>(url: string, options: Options): Observable<T> {
     return this.httpClient.delete<T>(url, options) as Observable<T>;
+  }
+  private data = new BehaviorSubject<string>('');
+
+  setData(data: string) {
+    console.log(data);
+    this.data.next(data);
+  }
+
+  getData() {
+    console.log(this.data);
+    return this.data.asObservable();
   }
 }

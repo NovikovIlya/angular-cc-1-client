@@ -5,6 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   standalone: true,
 })
 export class TruncateNamePipe implements PipeTransform {
+  
   // Used to truncate a string to a certain length
   transform(
     value: string,
