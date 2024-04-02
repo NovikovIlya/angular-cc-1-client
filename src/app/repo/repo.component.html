@@ -1,26 +1,38 @@
-
 <div class="load" *ngIf="isLoading">
-    <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
+  <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
 </div>
 <div class="container" *ngIf="repositories && repositories.length > 0">
   <div *ngFor="let item of repositories">
-    <a [href]="item.svn_url">
+    <a class="lin" [href]="item.svn_url">
+      <div>
         <div class="head">
-            <div class="text">{{item.name}}</div>
-            <div class="text2">{{item.visibility}}</div>
+          <div class="text">{{ item.name }}</div>
+          <div class="text2">{{ item.visibility }}</div>
         </div>
-        <div class="text3">{{item.description}}</div>
+        <div>
+          <div class="text3">
+            Updated on {{ item.updated_at | date : "dd.MM.yyyy" }}
+          </div>
+        </div>
+        <div class="text3">{{ item.description }}</div>
+        
+      </div>
+      <div>
         <div class="starts">
-            <img class="images" src="https://www.svgrepo.com/show/375902/star.svg"/>
-            <div class="text3">{{item.stargazers_count}}</div>
-        </div>
-        <div class="starts"> 
-            <img class="images" src="https://www.svgrepo.com/show/530488/share.svg"/>
-            <div class="text3">{{item.forks_count}}</div>
-        </div>
-        <div class="text3">Updated on{{item.updated_at}}</div>
+            <img
+              class="images"
+              src="https://www.svgrepo.com/show/375902/star.svg"
+            />
+            <div class="text3">{{ item.stargazers_count }}</div>
+          </div>
+          <div class="starts">
+            <img
+              class="images"
+              src="https://www.svgrepo.com/show/530488/share.svg"
+            />
+            <div class="text3">{{ item.forks_count }}</div>
+          </div>
+      </div>
     </a>
   </div>
 </div>
-
-

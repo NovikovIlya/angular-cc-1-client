@@ -3,6 +3,7 @@ import { ProductsService } from '../services/products.service';
 import { ActivatedRoute } from '@angular/router';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { CommonModule } from '@angular/common';
+import { DatePipe } from '@angular/common';
 
 type repoType = {
   id: number
@@ -89,7 +90,7 @@ type repoType = {
 @Component({
   selector: 'app-repo',
   standalone: true,
-  imports: [ProgressSpinnerModule,CommonModule],
+  imports: [ProgressSpinnerModule,CommonModule,DatePipe],
   templateUrl: './repo.component.html',
   styleUrl: './repo.component.scss',
 })
