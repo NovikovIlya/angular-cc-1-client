@@ -1,20 +1,20 @@
 <div class="load" *ngIf="isLoading">
   <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
 </div>
-<div class="container" *ngIf="repositories && repositories.length > 0">
-  <div *ngFor="let item of repositories">
-    <a class="lin" [href]="item.svn_url">
+<div class="container" *ngIf="info">
+  <div >
+    <div class="lin" >
       <div>
         <div class="head">
-          <div class="text">{{ item.name }}</div>
-          <div class="text2">{{ item.visibility }}</div>
+          <div class="text">{{ info.title }}</div>
+          <div class="text2">{{ info.description }}</div>
         </div>
         <div>
           <div class="text3">
-            Updated on {{ item.updated_at | date : "dd.MM.yyyy" }}
+            Status {{ info.completed }}
           </div>
         </div>
-        <div class="text3">{{ item.description }}</div>
+        <div class="text3">{{ info.line }}</div>
         
       </div>
       <div>
@@ -23,16 +23,17 @@
               class="images"
               src="https://www.svgrepo.com/show/375902/star.svg"
             />
-            <div class="text3">{{ item.stargazers_count }}</div>
+            <div class="text3">{{ info.people }}</div>
           </div>
           <div class="starts">
             <img
               class="images"
               src="https://www.svgrepo.com/show/530488/share.svg"
             />
-            <div class="text3">{{ item.forks_count }}</div>
+            <div class="textColor">{{info.priority}}</div>
           </div>
       </div>
-    </a>
+      <button>Изменить</button>
+    </div>
   </div>
 </div>

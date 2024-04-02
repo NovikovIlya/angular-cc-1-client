@@ -1,4 +1,4 @@
-import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
+import { getState, patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { ProductsService } from '../services/products.service';
 import { inject } from '@angular/core';
 
@@ -18,10 +18,19 @@ export const BooksStore = signalStore(
   withState(initialState),
   withMethods((store, productsService = inject(ProductsService)) => ({
     updateQuery(name: string): void {
-      patchState(store, (state) => ({ filter: name }));
+      patchState(store, (state) => ({ 
+        ...state,
+        filter: name 
+       }));
     },
     setData(books:any){
-      patchState(store, (state)=>({books:books}))
+      patchState(store, (state)=>({...state, books:books}))
+    },
+    deleteData(id:any){
+      const state = getState(store);
+      const filterBook = state.books.filter((item:any)=>item.id!==id)
+      console.log('fitler,',filterBook)
+      patchState(store, (state)=>({...state, books: filterBook}))
     }
     // async getData(){
     //   const books = await productsService.getProducts(`https://828af6af59952382.mokky.dev/all`);

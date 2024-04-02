@@ -1,22 +1,7 @@
 .search {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  padding: 10px 10px 10px 16px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  background-color: var(--search);
-  border-radius: 15px;
-  
-
-  @media (min-width: 767px) {
-    padding: 10px 10px 10px 30px;
-  }
-
-  &>button {
-    flex-shrink: 0;
-  }
+  display: grid;
+  grid-template-columns: 1fr;
+  gap:30px;
 }
 
 .label {
@@ -39,12 +24,19 @@
       background-color:  #0077ffaf;
     }
 }
-
+.wh{
+  width: 100%;
+  display: grid;
+}
+.mix{
+  display: flex;
+  gap:10px;
+}
 .textField {
   padding: 0 10px;
-  flex-grow: 5;
+  flex-grow: 1;
   height: 60px;
-  max-width: calc(100% - 100px - 20px);
+  // max-width: calc(100% - 100px - 20px);
   border: none;
   color: var(--textColor); // Добавлено
   font-size: 0.75rem;

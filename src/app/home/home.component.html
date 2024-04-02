@@ -1,8 +1,10 @@
+
+<app-header></app-header>
 <div class="load" *ngIf="isLoading">
   <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
 </div>
-<div class="userCard" *ngIf="!isLoading && user">
-  <img  [src]="user.avatar_url" class="avatar" />
+<div class="userCard" *ngIf="!isLoading">
+  <!-- <img  [src]="user.avatar_url" class="avatar" />
   <div class="head">
     <div class="created">{{ user?.name }}</div>
     <h1 class="created2">{{ joinedDate }}</h1>
@@ -47,10 +49,15 @@
         <span>{{ user.twitter_username || "Not Available" }}</span>
       </div>
     </div>
-  </div>
+  </div> -->
   <div *ngIf="store.books()">
-    <div *ngFor="let item of store.books()">
-      {{item.title}}
+    <div class="main"  *ngFor="let item of store.books()">
+      <a  class="info" [routerLink]="'/repo/' + item.id">
+        <div class="textStyle zag"><div>Заголовок:</div> <div> {{item.title}}</div></div>
+        <div class="textStyle status"><div>Статус:</div> <div>{{item.completed ? 'Выполнено' : 'Не выполнено'}}</div></div>
+        <div class="textStyle dedline"><div>Дедлайн:</div> <div>{{item.line | date: 'dd.MM.yyyy'}}</div></div>
+      </a>
+      <button (click)="deleteTask(item.id)" class="btn">Удалить</button>
     </div>
   </div>
   <!-- <div>{{store.filter()}}</div> -->

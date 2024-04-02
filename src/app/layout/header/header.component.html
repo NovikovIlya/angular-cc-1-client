@@ -1,13 +1,21 @@
-<div class="search">
-  <label htmlFor="search" className="{styles.label}">
-    <img class="images" src="https://www.svgrepo.com/show/388517/search.svg" />
-  </label>
-  <input
-    class="textField"
-    type="text"
-    placeholder="Search GitHub username..."
-    [(ngModel)]="name"
-  />
-  <input class="textField" type="text" placeholder="Title" [(ngModel)]="title" />
-  <button class="btn" (click)="setData()">Search</button>
-</div>
+<button class="btn" (click)="showModalDialog()" icon="pi pi-external-link" label="Show">Добавить задачу</button>
+<p-dialog header="Добавьте новую задачу" [(visible)]="displayModal" [style]="{width: '50vw'}">
+  <div class="search">
+    <input
+      pInputText
+      type="text"
+      placeholder="Имя ответственного"
+      [(ngModel)]="name"
+    />
+    <input pInputText type="text" placeholder="Заголовок задачи" [(ngModel)]="title" />
+    <textarea rows="5" cols="30" pInputTextarea placeholder="Описание задачи" [(ngModel)]="description" ></textarea>
+    <div class="mix">
+      <span class="p-float-label">
+        <p-calendar class="wh" [(ngModel)]="date" inputId="birth_date"></p-calendar>
+        <label for="birth_date">Дата дедлайна</label>
+      </span>
+      <p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name" [showClear]="true" placeholder="Приоритет"></p-dropdown>
+    </div>
+    <button class="btn" (click)="setData()">Добавить</button>
+  </div>
+</p-dialog>
