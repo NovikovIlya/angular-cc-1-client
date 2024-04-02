@@ -1,6 +1,6 @@
 <div *ngIf="isLoading">Loading...</div>
 <div class="userCard" *ngIf="!isLoading && user">
-  <img [src]="user.avatar_url" class="avatar" />
+  <img (click)="setStore()" [src]="user.avatar_url" class="avatar" />
   <div class="head">
     <div class="created">{{ user?.name }}</div>
     <h1 class="created2">{{ joinedDate }}</h1>
@@ -46,4 +46,5 @@
       </div>
     </div>
   </div>
+  <!-- <div>{{store.filter()}}</div> -->
 </div>

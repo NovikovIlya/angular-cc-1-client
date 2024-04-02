@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, inject } from '@angular/core';
 import { ProductsService } from '../services/products.service';
 import { Product, Products } from '../../types';
 
@@ -7,6 +7,7 @@ import { Paginator, PaginatorModule } from 'primeng/paginator';
 
 import { ButtonModule } from 'primeng/button';
 import { ApiService } from '../services/api.service';
+import { BooksStore } from '../store/items.store';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,7 @@ import { ApiService } from '../services/api.service';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
+  readonly store = inject(BooksStore);
   constructor(
     private productsService: ProductsService,
     private apiService: ApiService
@@ -45,7 +47,9 @@ export class HomeComponent {
         },
       });
   }
-
+  setStore(){
+    this.store.updateQuery('zaza')
+  }
   localDate = new Intl.DateTimeFormat('en-GB', {
     day: 'numeric',
     month: 'short',
