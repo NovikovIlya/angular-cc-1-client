@@ -2,7 +2,7 @@
   <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
 </div>
 <div class="userCard" *ngIf="!isLoading && user">
-  <img (click)="setStore()" [src]="user.avatar_url" class="avatar" />
+  <img  [src]="user.avatar_url" class="avatar" />
   <div class="head">
     <div class="created">{{ user?.name }}</div>
     <h1 class="created2">{{ joinedDate }}</h1>
@@ -46,6 +46,11 @@
         <img src="../../assets/icon-twitter.svg" />
         <span>{{ user.twitter_username || "Not Available" }}</span>
       </div>
+    </div>
+  </div>
+  <div *ngIf="store.books()">
+    <div *ngFor="let item of store.books()">
+      {{item.title}}
     </div>
   </div>
   <!-- <div>{{store.filter()}}</div> -->

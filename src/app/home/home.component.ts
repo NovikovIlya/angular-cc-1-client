@@ -25,13 +25,26 @@ export class HomeComponent {
     private productsService: ProductsService,
     private apiService: ApiService
   ) {}
-
+   
   // lifecycle
   ngOnInit() {
     this.apiService.getData().subscribe((name: string) => {
       this.name = name;
       this.fetchProducts(name);
     });
+
+    this.productsService.getProducts('https://828af6af59952382.mokky.dev/all')
+      .subscribe({
+        next: (books) => {
+          this.isLoading = false;
+          this.store.setData(books);
+        },
+        error: (error) => {
+          this.isLoading = false;
+          console.error(error);
+        },
+      });
+  
   }
 
   // methods
@@ -53,10 +66,11 @@ export class HomeComponent {
         },
       });
   }
+  
 
-  setStore() {
-    this.store.updateQuery('zaza');
-  }
+  // setStore() {
+  //   this.store.getData();
+  // }
 
   localDate = new Intl.DateTimeFormat('en-GB', {
     day: 'numeric',

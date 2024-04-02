@@ -1,5 +1,3 @@
-
-
 <div class="search">
   <label htmlFor="search" className="{styles.label}">
     <img class="images" src="https://www.svgrepo.com/show/388517/search.svg" />
@@ -10,5 +8,6 @@
     placeholder="Search GitHub username..."
     [(ngModel)]="name"
   />
+  <input class="textField" type="text" placeholder="Title" [(ngModel)]="title" />
   <button class="btn" (click)="setData()">Search</button>
 </div>

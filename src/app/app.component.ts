@@ -13,11 +13,7 @@ import { HeaderComponent } from './layout/header/header.component';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  theme = "dark";
-  toggleTheme() {
-    this.theme = this.theme === 'dark' ? 'light' : 'dark';
-    document.body.setAttribute('data-theme', this.theme);
-  }
+
   ngOnInit(){
     document.body.setAttribute('data-theme', 'dark');
   }
