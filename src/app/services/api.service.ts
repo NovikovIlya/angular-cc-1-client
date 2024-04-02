@@ -31,15 +31,13 @@ export class ApiService {
   delete<T>(url: string, options: Options): Observable<T> {
     return this.httpClient.delete<T>(url, options) as Observable<T>;
   }
-  private data = new BehaviorSubject<string>('ilya');
+  private data = new BehaviorSubject<string>('Octocat');
 
   setData(data: string) {
-    console.log(data);
     this.data.next(data);
   }
 
   getData() {
-    console.log(this.data);
     return this.data.asObservable();
   }
 }

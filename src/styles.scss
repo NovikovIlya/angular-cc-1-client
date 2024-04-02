@@ -1,6 +1,4 @@
 // Your global styles: imports, variables, etc.
-@import "./styles/variables.scss";
-@import "./styles/theme-overrides.scss";
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
 
@@ -55,10 +53,6 @@ body[data-theme='light'] {
 body[data-theme='dark'] {
   --info-color: var(--gray-500);
 }
-// app-root {
-//   height: 100%;
-//   background-color: #F6F8FF;
-// }
 
 
 app-root {
