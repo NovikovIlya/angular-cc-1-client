@@ -2,7 +2,7 @@
   <div  class="container">
     <!-- <app-theme/> -->
     <div class="headMain">
-      <span class="textHead">DevFinder</span>
+      <a routerLink="/" class="textHead">DevFinder</a>
       <div class="hed">
         <div class="textHead2" (click)="toggleTheme()">{{theme==='dark' ? 'LIGHT' : 'DARK'}}</div>
         <img *ngIf="theme==='dark'" src='../assets/icon-sun.svg'/>

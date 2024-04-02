@@ -1,21 +1,21 @@
 import { Component, inject } from '@angular/core';
 import { ProductsService } from '../services/products.service';
-
 import { CommonModule } from '@angular/common';
-
 import { ApiService } from '../services/api.service';
 import { BooksStore } from '../store/items.store';
+import { RouterModule } from '@angular/router';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule,ProgressSpinnerModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
   readonly store = inject(BooksStore);
-
+  // data
   user: any = {};
   name: string | undefined = '';
   isLoading: boolean = true;
@@ -26,6 +26,7 @@ export class HomeComponent {
     private apiService: ApiService
   ) {}
 
+  // lifecycle
   ngOnInit() {
     this.apiService.getData().subscribe((name: string) => {
       this.name = name;
@@ -33,6 +34,7 @@ export class HomeComponent {
     });
   }
 
+  // methods
   fetchProducts(name: string) {
     this.isLoading = true;
     this.productsService
@@ -46,7 +48,6 @@ export class HomeComponent {
           );
           console.log(this.user);
         },
-
         error: (error) => {
           console.log(error);
         },

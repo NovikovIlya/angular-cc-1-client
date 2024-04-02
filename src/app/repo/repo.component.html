@@ -1,0 +1,11 @@
+
+<div class="load" *ngIf="isLoading">
+    <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
+</div>
+<div *ngIf="repositories && repositories.length > 0">
+  <div *ngFor="let item of repositories">
+    {{item.name}}
+  </div>
+</div>
+
+

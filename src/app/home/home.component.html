@@ -1,4 +1,6 @@
-<div *ngIf="isLoading">Loading...</div>
+<div class="load" *ngIf="isLoading">
+  <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
+</div>
 <div class="userCard" *ngIf="!isLoading && user">
   <img (click)="setStore()" [src]="user.avatar_url" class="avatar" />
   <div class="head">
@@ -12,10 +14,10 @@
   </p>
 
   <div class="info">
-    <div>
+    <a class="linkStyle" [routerLink]="'/repo/' + user.login" routerLinkActive="active">
       <div>Repos</div>
       <div>{{ user.public_repos }}</div>
-    </div>
+    </a>
     <div>
       <div>Following</div>
       <div>{{ user.following }}</div>

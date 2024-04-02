@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule, NgClass } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './layout/header/header.component';
 
 
@@ -8,7 +8,7 @@ import { HeaderComponent } from './layout/header/header.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, HeaderComponent,NgClass],
+  imports: [CommonModule, RouterOutlet, HeaderComponent,NgClass,RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

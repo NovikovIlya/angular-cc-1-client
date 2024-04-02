@@ -21,7 +21,8 @@
 }
 .textHead{
   color:var(--textColor);
-  cursor:default;
+  cursor:pointer;
+  text-decoration: none;
 }
 .textHead2{
   color:var(--textColor);

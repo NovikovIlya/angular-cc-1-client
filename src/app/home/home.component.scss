@@ -75,3 +75,11 @@
     opacity: 0.75;
   }
 }
+.linkStyle{
+  color:var(--textColor)
+}
+.load{
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
