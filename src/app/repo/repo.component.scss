@@ -1,5 +1,34 @@
-.load{
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-  }
+.container{
+  margin-top:20px;
+  padding:10px;
+}
+.load {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+.head{
+  display: flex;
+  align-items: center;
+  gap:10px;
+}
+.text {
+  color: var(--textColor);
+}
+.text2{
+  border:1px solid gray;
+  border-radius: 7px;
+  padding: 5px;
+  color:gray;
+}
+.text3{
+  color: gray
+}
+.starts{
+  display:flex;
+  gap:5px;
+  
+}
+.images{
+  width: 20px;
+}
