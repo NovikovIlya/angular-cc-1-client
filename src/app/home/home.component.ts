@@ -40,8 +40,7 @@ export type selectType = {
 export class HomeComponent {
   readonly store = inject(BooksStore);
   // data
-  user: any = {};
-  name: any = '';
+  name: string = '';
   isLoading: boolean = true;
   joinedDate = '';
   cities = [
@@ -53,6 +52,7 @@ export class HomeComponent {
   selectedCity = { name: '', code: null };
 
   status = [
+    { name: 'Все', code: '' },
     { name: 'Не выполнен', code: 'false' },
     { name: 'Выполнен', code: 'true' },
   ];
@@ -87,7 +87,6 @@ export class HomeComponent {
 
   // methods
   search() {
-    console.log(this.selectedCity);
     this.fetchProducts();
   }
   fetchProducts() {
@@ -102,14 +101,9 @@ export class HomeComponent {
       )
       .subscribe({
         next: (data: any) => {
-          this.user = data;
           this.isLoading = false;
           const bookReverse = data.toReversed();
           this.store.setData(bookReverse);
-
-          // this.joinedDate = this.localDate.format(
-          //   new Date(this.user.created_at)
-          // );
         },
         error: (error) => {
           console.log(error);
@@ -123,14 +117,9 @@ export class HomeComponent {
       )
       .subscribe({
         next: (data: any) => {
-          this.user = data;
           this.isLoading = false;
           const bookReverse = data.toReversed();
           this.store.setData(bookReverse);
-
-          // this.joinedDate = this.localDate.format(
-          //   new Date(this.user.created_at)
-          // );
         },
         error: (error) => {
           console.log(error);
@@ -138,12 +127,10 @@ export class HomeComponent {
       });
   }
 
-  deleteTask(id: any) {
+  deleteTask(id: number) {
     this.http.delete(`https://828af6af59952382.mokky.dev/all/${id}`).subscribe({
       next: (data) => {
-        // this.store.setData([data, ...this.store.books()]);
         this.store.deleteData(id);
-        console.log(data);
       },
       error: (error) => {
         console.error(error);

@@ -14,14 +14,14 @@ import { HttpClient } from '@angular/common/http';
 import { BooksStore } from '../store/items.store';
 
 export type infoType = {
-  title: string
-  description: string
-  completed: boolean
-  line: string
-  people: string
-  id: number
-  priority:string,
-}
+  title: string;
+  description: string;
+  completed: boolean;
+  line: string;
+  people: string;
+  id: number;
+  priority: string;
+};
 export type selectType = {
   name: string;
   code: string;
@@ -30,20 +30,36 @@ export type selectType = {
 @Component({
   selector: 'app-repo',
   standalone: true,
-  imports: [ProgressSpinnerModule,CommonModule,DatePipe,DialogModule,InputTextModule,CalendarModule,DropdownModule,InputTextareaModule,FormsModule,RouterModule],
+  imports: [
+    ProgressSpinnerModule,
+    CommonModule,
+    DatePipe,
+    DialogModule,
+    InputTextModule,
+    CalendarModule,
+    DropdownModule,
+    InputTextareaModule,
+    FormsModule,
+    RouterModule,
+  ],
   templateUrl: './repo.component.html',
   styleUrl: './repo.component.scss',
 })
 export class RepoComponent {
   // data
+  listStatus = [
+    { name: 'Выполнен', code: true },
+    { name: 'Не выполнен', code: false },
+  ];
+  status = { name: 'Не выполнен', code: true };
   isLoading = true;
-  info: infoType | null  = null;
+  info: infoType | null = null;
   id: number = 1;
   name: string | undefined = '';
   title: string = 'test';
   displayModal: boolean = false;
   description: string = 'testDesc';
-  date:any = '01.01.2023';
+  date: any = '01.01.2023';
   priority = 'Высокий';
   cities = [
     { name: 'Высокий', code: 'NY' },
@@ -51,28 +67,28 @@ export class RepoComponent {
     { name: 'Низкий', code: 'TM' },
   ];
   selectedCity: selectType = { name: 'Средний', code: 'RM' };
-  
+
   readonly store = inject(BooksStore);
   constructor(
     private productsService: ProductsService,
     private activateRoute: ActivatedRoute,
-    private http: HttpClient,
+    private http: HttpClient
   ) {}
 
   // methods
   showModalDialog() {
+    this.status = this.info?.completed
+      ? { name: 'Выполнен', code: true }
+      : { name: 'Не выполнен', code: false };
     this.displayModal = true;
-    console.log('ss',this.info)
-    console.log('bb',this.name,this.title,this.description,this.date,this.selectedCity)
-    this.name = this.info?.people 
-    this.title = this.info?.title || 'test'
-    this.description = this.info?.description || 'test'
-    this.date = new Date(this.info?.line || '2024-04-09T21:00:00.000Z')
-
-    this.selectedCity = {name:this.info?.priority || 'Высокий',code:'RM'}
-    console.log('bb2',this.selectedCity)
+    this.name = this.info?.people;
+    this.title = this.info?.title || 'test';
+    this.description = this.info?.description || 'test';
+    this.date = new Date(this.info?.line || '2024-04-09T21:00:00.000Z');
+    this.selectedCity = { name: this.info?.priority || 'Высокий', code: 'RM' };
   }
-  setData(id:any) {
+
+  setData(id: number) {
     if (!this.name || !this.title || !this.description) {
       alert('Введите информацию');
       return;
@@ -80,32 +96,35 @@ export class RepoComponent {
     this.sendTextEdit(id);
     this.displayModal = false;
   }
-  sendTextEdit(id:any) {
-    const datePipe = new DatePipe('en-EN')
+
+  sendTextEdit(id: number) {
+    const datePipe = new DatePipe('en-EN');
     const formattedDate = datePipe.transform(this.date);
+
     const body = {
       title: this.title,
       description: this.description,
-      completed: false,
+      completed: this.status.code,
       line: formattedDate,
       people: this.name,
       priority: this.selectedCity?.name,
     };
-    this.isLoading = true;
-    this.http.patch(`https://828af6af59952382.mokky.dev/all/${id}`, body).subscribe({
-      next: (data:any) => {
-        this.info = data;
-        // this.store.setData([data, ...this.store.books()]);
-        this.isLoading = false;
-        
-      },
-      error: (error) => {
-        console.error(error);
-      },
-    });
 
+    this.isLoading = true;
+    this.http
+      .patch(`https://828af6af59952382.mokky.dev/all/${id}`, body)
+      .subscribe({
+        next: (data: any) => {
+          this.info = data;
+          this.isLoading = false;
+        },
+        error: (error) => {
+          console.error(error);
+        },
+      });
   }
-  fetchProducts(nameUser: any) {
+
+  fetchProducts(nameUser: string) {
     this.isLoading = true;
     this.productsService
       .getProducts(`https://828af6af59952382.mokky.dev/all/${nameUser}`)
@@ -119,11 +138,11 @@ export class RepoComponent {
         },
       });
   }
+
   ngOnInit() {
-  // Получение данных по конкретной тасук
-   this.activateRoute.params.subscribe((params) => {
-      //@ts-ignore
-      this.fetchProducts(params.name); 
+    // Получение данных по конкретной тасук
+    this.activateRoute.params.subscribe((params) => {
+      this.fetchProducts(params['name']);
     });
   }
 }

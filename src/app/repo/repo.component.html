@@ -1,95 +1,128 @@
+<a class="back" routerLink="/"><-</a>
 <div class="load" *ngIf="isLoading">
   <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
 </div>
-<a routerLink="/" class="textHead">DevFinder</a>
 <div class="container" *ngIf="info && !isLoading">
   <div>
     <div class="lin">
-      <div>
-        <div class="head">
-          <div class="text">{{ info.title }}</div>
-          <div class="text2">{{ info.description }}</div>
+      <div class="hhh">
+        <div class="mainHead">
+          <div class="head">
+            <div class="text">{{ info.title }}</div>
+          </div>
+          <div>
+            <div class="starts">
+              <img
+                class="images"
+                src="https://www.svgrepo.com/show/397428/mechanic-dark-skin-tone.svg"
+              />
+              <div class="text3">{{ info.people }}</div>
+            </div>
+            <div class="starts">
+              <img class="images" [src]="info.priority  === 'middle' ? 'https://www.svgrepo.com/show/335284/status-lagging.svg' : info.priority === 'low' ? 'https://www.svgrepo.com/show/335281/status-connected.svg' : 'https://www.svgrepo.com/show/335283/status-disconnected.svg'" />
+              <div class="textColor">
+                {{
+                  info.priority === "middle"
+                    ? "Средний"
+                    : info.priority === "low"
+                    ? "Низкий"
+                    : "Высокий"
+                }}
+              </div>
+            </div>
+          </div>
         </div>
-        <div>
-          <div class="text3">Status {{ info.completed }}</div>
-        </div>
-        <div class="text3">{{ info.line | date: 'dd.MM.yyyy'}}</div>
-      </div>
-      <div>
-        <div class="starts">
-          <img
-            class="images"
-            src="https://www.svgrepo.com/show/375902/star.svg"
-          />
-          <div class="text3">{{ info.people }}</div>
-        </div>
-        <div class="starts">
-          <img
-            class="images"
-            src="https://www.svgrepo.com/show/530488/share.svg"
-          />
-          <div class="textColor">{{ info.priority }}</div>
+
+        <div class="text2 bodyy">{{ info.description }}</div>
+        <div class="footerMain">
+          <div>
+            <div class="text3">
+              Статус: {{ info.completed ? "Выполнено" : "Не выполнено" }}
+            </div>
+          </div>
+          <div class="text3">Дедлайн: {{ info.line | date : "dd.MM.yyyy" }}</div>
+  
+          <button
+            class="btn"
+            (click)="showModalDialog()"
+            icon="pi pi-external-link"
+            label="Show"
+          >
+            Изменить задачу
+          </button>
         </div>
       </div>
 
-      <button
-        class="btn"
-        (click)="showModalDialog()"
-        icon="pi pi-external-link"
-        label="Show"
-      >
-        Изменить задачу
-      </button>
       <p-dialog
         header="Изменить задачу"
-        
-         [(visible)]="displayModal" [style]="{  height: '100vh' }"
+        [(visible)]="displayModal"
+        [style]="{ height: '100vh' }"
       >
         <div class="search">
           <div class="hh">
-        
-          <span class="p-float-label ">
-            <input class="ww" [value]="info.people" pInputText id="username1" [(ngModel)]="name" />
-            <label for="username1">Имя ответственного</label>
-          </span>
-          
-          <span class="p-float-label">
-            <input class="ww" [value]="info.title" pInputText id="username2" [(ngModel)]="title" />
-            <label for="username2">Заголовок задачи</label>
-          </span>
-
-          <span class="p-float-label">
-            <textarea
-            class="ww"
-            rows="5"
-            cols="30"
-            pInputTextarea
-            [(ngModel)]="description"
-            id="username3"
-          ></textarea>
-            <label for="username3">Описание задачи</label>
-          </span>
-
-          
-          
-          <div class="mix">
             <span class="p-float-label">
-              <p-calendar
-               dateFormat="dd.mm.yy"
-                class="wh"
-                [(ngModel)]="date"
-                inputId="birth_date"
-              ></p-calendar>
-              <label for="birth_date">Дата дедлайна</label>
+              <input
+                class="ww"
+                [value]="info.people"
+                pInputText
+                id="username1"
+                [(ngModel)]="name"
+              />
+              <label for="username1">Имя ответственного</label>
             </span>
-            <p-dropdown
-              [options]="cities"
-              [(ngModel)]="selectedCity"
-              optionLabel="name"
-              [showClear]="true"
-              placeholder="Приоритет" 
-            ></p-dropdown>
-          </div>
+
+            <span class="p-float-label">
+              <input
+                class="ww"
+                [value]="info.title"
+                pInputText
+                id="username2"
+                [(ngModel)]="title"
+              />
+              <label for="username2">Заголовок задачи</label>
+            </span>
+
+            <span class="p-float-label">
+              <textarea
+                class="ww"
+                rows="5"
+                cols="30"
+                pInputTextarea
+                [(ngModel)]="description"
+                id="username3"
+              ></textarea>
+              <label for="username3">Описание задачи</label>
+            </span>
+
+            <div class="mix">
+              <span class="p-float-label">
+                <p-calendar
+                  dateFormat="dd.mm.yy"
+                  class="wh"
+                  [(ngModel)]="date"
+                  inputId="birth_date"
+                ></p-calendar>
+                <label for="birth_date">Дата дедлайна</label>
+              </span>
+              <p-dropdown
+                [options]="cities"
+                [(ngModel)]="selectedCity"
+                optionLabel="name"
+                [showClear]="true"
+                placeholder="Приоритет"
+              ></p-dropdown>
+
+              
+            </div>
+            <div class="stat">
+              <p-dropdown
+                [options]="listStatus"
+                [(ngModel)]="status"
+                optionLabel="name"
+                [showClear]="true"
+                placeholder="Статус"
+              ></p-dropdown>
+            </div>
           </div>
           <button class="btn" (click)="setData(info.id)">Изменить</button>
         </div>

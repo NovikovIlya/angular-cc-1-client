@@ -34,12 +34,19 @@
 }
 .text3{
   color: gray;
-  margin-bottom: 7px;
+  font-size: 16px;
 }
 .starts{
   display:flex;
   gap:5px;
+  align-items: center;
+  margin-bottom: 10px;
+
   
+}
+.stat{
+  width: 100%;
+  margin-bottom: 20px;
 }
 .images{
   width: 20px;
@@ -48,8 +55,32 @@
   color:white;
 }
 
+.back{
+  text-decoration: none;
+  color:white;
+}
+.back:hover{
+  color:gray;
+}
 
-
+.mainHead{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.bodyy{
+  margin-bottom: 20px;
+}
+.footerMain{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+ 
+}
+.hhh{
+  width: 100%;
+}
 
 .search{
   margin-top: 20px;

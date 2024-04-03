@@ -64,6 +64,13 @@ export class HeaderComponent {
     }
     this.sendText();
     this.displayModal = false;
+
+    // сброс полей
+    this.title = '';
+    this.description = '';
+    this.name = '';
+    this.date = null;
+    this.selectedCity = { name: 'Высокий', code: 'high' };
   }
 
   sendText() {
@@ -79,12 +86,13 @@ export class HeaderComponent {
     };
 
     this.http.post('https://828af6af59952382.mokky.dev/all', body).subscribe({
-      next: (data) => {
+      next: (data:any) => {
         this.store.setData([data, ...this.store.books()]);
       },
       error: (error) => {
         console.error(error);
       },
     });
+    
   }
 }

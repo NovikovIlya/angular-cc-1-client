@@ -36,10 +36,8 @@
       <label for="birth_date">Дата дедлайна</label>
     </span>
   </div>
- 
     <app-header class=""></app-header>
     <p-button  (click)="search()" class="btn d3">Искать</p-button>
-  
 </div>
 
 <div class="load" *ngIf="isLoading">
@@ -47,9 +45,9 @@
 </div>
 
 <div class="userCard" *ngIf="!isLoading">
-  <div class="ww" *ngIf="store.books()">
+  <div class="ww" *ngIf="store.books().length > 0">
     <div class="main" *ngFor="let item of store.books()">
-      <a class="info" [routerLink]="'/repo/' + item.id">
+      <a [ngClass]="{'activeRed': item.priority === 'high' && !item.completed, 'activeBlue': item.priority === 'middle'  && !item.completed, 'activeGreen': item.priority === 'low'  && !item.completed}" class="info" [routerLink]="'/task/' + item.id">
         <div class="textStyle zag">
           <div>Заголовок:</div>
           <div>{{ item.title }}</div>
@@ -66,4 +64,5 @@
       <img (click)="deleteTask(item.id)" class="image" src="https://www.svgrepo.com/show/464640/delete-alt.svg"/>
     </div>
   </div>
+  <div class="textStyle noData" *ngIf="store.books().length === 0">Ничего не найдено</div>
 </div>

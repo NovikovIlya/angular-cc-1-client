@@ -9,14 +9,12 @@ import { PaginationParams, Products } from '../../types';
 export class ProductsService {
   constructor(private apiService: ApiService) {}
 
-  // Getting products from the API
   getProducts = (   name: string ): Observable<any> => {
     return this.apiService.get(name, {
       responseType: 'json',
     });
   };
 
-  // Adding a product via the API
   addProduct = (url: string, body: any): Observable<any> => {
     return this.apiService.post(url, body, {});
   };

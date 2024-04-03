@@ -1,12 +1,28 @@
-import { getState, patchState, signalStore, withMethods, withState } from '@ngrx/signals';
+import {
+  getState,
+  patchState,
+  signalStore,
+  withMethods,
+  withState,
+} from '@ngrx/signals';
 import { ProductsService } from '../services/products.service';
 import { inject } from '@angular/core';
 
-type init = {
-  books: any,
-  isLoading:boolean,
-  filter:string;
+export type dataType = {
+  title: string
+  description: string
+  completed: boolean
+  line: string
+  people: string
+  priority: string
+  id: number
 }
+
+export type init = {
+  books: dataType[];
+  isLoading: boolean;
+  filter: string;
+};
 const initialState: init = {
   books: [],
   isLoading: false,
@@ -18,26 +34,18 @@ export const BooksStore = signalStore(
   withState(initialState),
   withMethods((store, productsService = inject(ProductsService)) => ({
     updateQuery(name: string): void {
-      patchState(store, (state) => ({ 
+      patchState(store, (state) => ({
         ...state,
-        filter: name 
-       }));
+        filter: name,
+      }));
     },
-    setData(books:any){
-      patchState(store, (state)=>({...state, books:books}))
+    setData(books: dataType[]) {
+      patchState(store, (state) => ({ ...state, books: books }));
     },
-    deleteData(id:any){
+    deleteData(id: number) {
       const state = getState(store);
-      const filterBook = state.books.filter((item:any)=>item.id!==id)
-      console.log('fitler,',filterBook)
-      patchState(store, (state)=>({...state, books: filterBook}))
+      const filterBook = state.books.filter((item: dataType) => item.id !== id);
+      patchState(store, (state) => ({ ...state, books: filterBook }));
     },
-    
-
-    // async getData(){
-    //   const books = await productsService.getProducts(`https://828af6af59952382.mokky.dev/all`);
-    //   console.log(books)
-    //   await patchState(store, { books });
-    // }
   }))
 );
