@@ -38,6 +38,7 @@ export type selectType = {
 export class HeaderComponent {
   constructor(private apiService: ApiService, private http: HttpClient) {}
   readonly store = inject(BooksStore);
+  
   // data
   name: string = '';
   title: string = '';
@@ -46,16 +47,13 @@ export class HeaderComponent {
   date = null;
   priority = null;
   cities = [
-    { name: 'Высокий', code: 'NY' },
-    { name: 'Средний', code: 'RM' },
-    { name: 'Низкий', code: 'TM' },
+    { name: 'Высокий', code: 'high' },
+    { name: 'Средний', code: 'middle' },
+    { name: 'Низкий', code: 'low' },
   ];
-  selectedCity: selectType = { name: 'Высокий', code: '123' };
+  selectedCity: selectType = { name: 'Высокий', code: 'high' };
 
   // methods
-  handleEvent(event: any) {
-    console.log(event)
-  }
   showModalDialog() {
     this.displayModal = true;
   }
@@ -77,7 +75,7 @@ export class HeaderComponent {
       completed: false,
       line: formattedDate,
       people: this.name,
-      priority: this.selectedCity?.name,
+      priority: this.selectedCity?.code,
     };
 
     this.http.post('https://828af6af59952382.mokky.dev/all', body).subscribe({

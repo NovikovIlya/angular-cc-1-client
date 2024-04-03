@@ -31,7 +31,9 @@ export const BooksStore = signalStore(
       const filterBook = state.books.filter((item:any)=>item.id!==id)
       console.log('fitler,',filterBook)
       patchState(store, (state)=>({...state, books: filterBook}))
-    }
+    },
+    
+
     // async getData(){
     //   const books = await productsService.getProducts(`https://828af6af59952382.mokky.dev/all`);
     //   console.log(books)

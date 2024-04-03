@@ -1,4 +1,11 @@
-.search {
+.search{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.hh {
   display: grid;
   grid-template-columns: 1fr;
   gap:30px;
@@ -9,6 +16,9 @@
 }
 .images{
   width: 25px;
+}
+.ww{
+  width: 100%;
 }
 .btn{
      padding: 12px 24px;

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { ProductsService } from '../services/products.service';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../services/api.service';
@@ -7,11 +7,33 @@ import { RouterModule } from '@angular/router';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { HeaderComponent } from '../layout/header/header.component';
 import { HttpClient } from '@angular/common/http';
+import { DropdownModule } from 'primeng/dropdown';
+import { FormsModule } from '@angular/forms';
+import { CalendarModule } from 'primeng/calendar';
+import { DatePipe } from '@angular/common';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+
+export type selectType = {
+  name: string;
+  code: string;
+};
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule,ProgressSpinnerModule,HeaderComponent],
+  imports: [
+    InputTextModule,
+    CalendarModule,
+    CommonModule,
+    RouterModule,
+    ProgressSpinnerModule,
+    HeaderComponent,
+    DropdownModule,
+    FormsModule,
+    DatePipe,
+    ButtonModule
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
@@ -19,24 +41,37 @@ export class HomeComponent {
   readonly store = inject(BooksStore);
   // data
   user: any = {};
-  name: string | undefined = '';
+  name: any = '';
   isLoading: boolean = true;
   joinedDate = '';
+  cities = [
+    { name: 'Все', code: '' },
+    { name: 'Высокий', code: 'high' },
+    { name: 'Средний', code: 'middle' },
+    { name: 'Низкий', code: 'low' },
+  ];
+  selectedCity = { name: '', code: null };
+
+  status = [
+    { name: 'Не выполнен', code: 'false' },
+    { name: 'Выполнен', code: 'true' },
+  ];
+  selectedstatus = { name: 'Не выполнен', code: null };
+
+  date = null;
+  people = null;
 
   constructor(
     private productsService: ProductsService,
     private apiService: ApiService,
     private http: HttpClient
-  ) {}
-   
+  ) {
+  }
+
   // lifecycle
   ngOnInit() {
-    this.apiService.getData().subscribe((name: string) => {
-      this.name = name;
-      this.fetchProducts(name);
-    });
-
-    this.productsService.getProducts('https://828af6af59952382.mokky.dev/all')
+    this.productsService
+      .getProducts(`https://828af6af59952382.mokky.dev/all`)
       .subscribe({
         next: (books) => {
           this.isLoading = false;
@@ -48,35 +83,67 @@ export class HomeComponent {
           console.error(error);
         },
       });
-  
   }
 
   // methods
-  fetchProducts(name: string) {
+  search() {
+    console.log(this.selectedCity);
+    this.fetchProducts();
+  }
+  fetchProducts() {
+    const datePipe = new DatePipe('en-EN')
+    const formattedDate = datePipe.transform(this.date);
+ 
     this.isLoading = true;
-    this.productsService
-      .getProducts(`https://api.github.com/users/${name}`)
+    if(!this.selectedCity.code && !this.selectedstatus?.code  && !this.people && !formattedDate ){
+      this.productsService
+      .getProducts(
+        `https://828af6af59952382.mokky.dev/all`
+      )
       .subscribe({
         next: (data: any) => {
           this.user = data;
           this.isLoading = false;
-          this.joinedDate = this.localDate.format(
-            new Date(this.user.created_at)
-          );
-          console.log(this.user);
+          const bookReverse = data.toReversed();
+          this.store.setData(bookReverse);
+
+          // this.joinedDate = this.localDate.format(
+          //   new Date(this.user.created_at)
+          // );
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
+      return
+    }
+    this.productsService
+      .getProducts(
+        `https://828af6af59952382.mokky.dev/all/?${this.selectedCity.code  ? `priority=`+this.selectedCity.code : ''}${this.selectedstatus.code ? `completed=`+this.selectedstatus.code:''}${formattedDate ? `&line=`+formattedDate : ''}${this.people ? `&people=`+this.people:''}`
+      )
+      .subscribe({
+        next: (data: any) => {
+          this.user = data;
+          this.isLoading = false;
+          const bookReverse = data.toReversed();
+          this.store.setData(bookReverse);
+
+          // this.joinedDate = this.localDate.format(
+          //   new Date(this.user.created_at)
+          // );
         },
         error: (error) => {
           console.log(error);
         },
       });
   }
-  
-  deleteTask(id:any){
+
+  deleteTask(id: any) {
     this.http.delete(`https://828af6af59952382.mokky.dev/all/${id}`).subscribe({
       next: (data) => {
         // this.store.setData([data, ...this.store.books()]);
-        this.store.deleteData(id)
-        console.log(data)
+        this.store.deleteData(id);
+        console.log(data);
       },
       error: (error) => {
         console.error(error);
@@ -84,9 +151,6 @@ export class HomeComponent {
     });
   }
 
-  // setStore() {
-  //   this.store.getData();
-  // }
 
   localDate = new Intl.DateTimeFormat('en-GB', {
     day: 'numeric',

@@ -1,39 +1,99 @@
 <div class="load" *ngIf="isLoading">
   <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
 </div>
-<div class="container" *ngIf="info">
-  <div >
-    <div class="lin" >
+<a routerLink="/" class="textHead">DevFinder</a>
+<div class="container" *ngIf="info && !isLoading">
+  <div>
+    <div class="lin">
       <div>
         <div class="head">
           <div class="text">{{ info.title }}</div>
           <div class="text2">{{ info.description }}</div>
         </div>
         <div>
-          <div class="text3">
-            Status {{ info.completed }}
-          </div>
+          <div class="text3">Status {{ info.completed }}</div>
         </div>
-        <div class="text3">{{ info.line }}</div>
-        
+        <div class="text3">{{ info.line | date: 'dd.MM.yyyy'}}</div>
       </div>
       <div>
         <div class="starts">
-            <img
-              class="images"
-              src="https://www.svgrepo.com/show/375902/star.svg"
-            />
-            <div class="text3">{{ info.people }}</div>
-          </div>
-          <div class="starts">
-            <img
-              class="images"
-              src="https://www.svgrepo.com/show/530488/share.svg"
-            />
-            <div class="textColor">{{info.priority}}</div>
-          </div>
+          <img
+            class="images"
+            src="https://www.svgrepo.com/show/375902/star.svg"
+          />
+          <div class="text3">{{ info.people }}</div>
+        </div>
+        <div class="starts">
+          <img
+            class="images"
+            src="https://www.svgrepo.com/show/530488/share.svg"
+          />
+          <div class="textColor">{{ info.priority }}</div>
+        </div>
       </div>
-      <button>Изменить</button>
+
+      <button
+        class="btn"
+        (click)="showModalDialog()"
+        icon="pi pi-external-link"
+        label="Show"
+      >
+        Изменить задачу
+      </button>
+      <p-dialog
+        header="Изменить задачу"
+        
+         [(visible)]="displayModal" [style]="{  height: '100vh' }"
+      >
+        <div class="search">
+          <div class="hh">
+        
+          <span class="p-float-label ">
+            <input class="ww" [value]="info.people" pInputText id="username1" [(ngModel)]="name" />
+            <label for="username1">Имя ответственного</label>
+          </span>
+          
+          <span class="p-float-label">
+            <input class="ww" [value]="info.title" pInputText id="username2" [(ngModel)]="title" />
+            <label for="username2">Заголовок задачи</label>
+          </span>
+
+          <span class="p-float-label">
+            <textarea
+            class="ww"
+            rows="5"
+            cols="30"
+            pInputTextarea
+            [(ngModel)]="description"
+            id="username3"
+          ></textarea>
+            <label for="username3">Описание задачи</label>
+          </span>
+
+          
+          
+          <div class="mix">
+            <span class="p-float-label">
+              <p-calendar
+               dateFormat="dd.mm.yy"
+                class="wh"
+                [(ngModel)]="date"
+                inputId="birth_date"
+              ></p-calendar>
+              <label for="birth_date">Дата дедлайна</label>
+            </span>
+            <p-dropdown
+              [options]="cities"
+              [(ngModel)]="selectedCity"
+              optionLabel="name"
+              [showClear]="true"
+              placeholder="Приоритет" 
+            ></p-dropdown>
+          </div>
+          </div>
+          <button class="btn" (click)="setData(info.id)">Изменить</button>
+        </div>
+      </p-dialog>
     </div>
   </div>
 </div>

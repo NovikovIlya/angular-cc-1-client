@@ -1,64 +1,69 @@
 
-<app-header></app-header>
+<div class="filters">
+  <div class="zz">
+    <p-dropdown
+      class="dd"
+      [options]="cities"
+      [(ngModel)]="selectedCity"
+      optionLabel="name"
+      [showClear]="true"
+      placeholder="Выберите приоритет"
+    ></p-dropdown>
+    <p-dropdown
+      class="dd"
+      [options]="status"
+      [(ngModel)]="selectedstatus"
+      optionLabel="name"
+      [showClear]="true"
+      placeholder="Выберите статус"
+    ></p-dropdown>
+  </div>
+  <div class="zz">
+    <input
+      class="dd"
+      pInputText
+      type="text"
+      placeholder="Ответственный"
+      [(ngModel)]="people"
+    />
+    <span class="p-float-label dd">
+      <p-calendar
+        dateFormat="dd.mm.yy"
+        class="wh dd"
+        [(ngModel)]="date"
+        inputId="birth_date"
+      ></p-calendar>
+      <label for="birth_date">Дата дедлайна</label>
+    </span>
+  </div>
+ 
+    <app-header class=""></app-header>
+    <p-button  (click)="search()" class="btn d3">Искать</p-button>
+  
+</div>
+
 <div class="load" *ngIf="isLoading">
   <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
 </div>
+
 <div class="userCard" *ngIf="!isLoading">
-  <!-- <img  [src]="user.avatar_url" class="avatar" />
-  <div class="head">
-    <div class="created">{{ user?.name }}</div>
-    <h1 class="created2">{{ joinedDate }}</h1>
-    <div class="created3">{{ "@" + user.login }}</div>
-  </div>
-
-  <p *ngIf="user.bio" class="bio">
-    {{ user.bio || "This profile has no bio" }}
-  </p>
-
-  <div class="info">
-    <a class="linkStyle" [routerLink]="'/repo/' + user.login" routerLinkActive="active">
-      <div>Repos</div>
-      <div>{{ user.public_repos }}</div>
-    </a>
-    <div>
-      <div>Following</div>
-      <div>{{ user.following }}</div>
-    </div>
-    <div>
-      <div>Followers</div>
-      <div>{{ user.followers }}</div>
-    </div>
-  </div>
-
-  <div class="infoTwo">
-    <div >
-      <div class="soc">
-        <img src="../../assets/icon-location.svg" />
-        <span>{{ user.location || "Not Available" }}</span>
-      </div>
-    </div>
-    <div >
-      <div class="soc">
-        <img src="../../assets/icon-website.svg" />
-        <span>{{ user.blog || "Not Available" }}</span>
-      </div>
-    </div>
-    <div >
-      <div class="soc">
-        <img src="../../assets/icon-twitter.svg" />
-        <span>{{ user.twitter_username || "Not Available" }}</span>
-      </div>
-    </div>
-  </div> -->
-  <div *ngIf="store.books()">
-    <div class="main"  *ngFor="let item of store.books()">
-      <a  class="info" [routerLink]="'/repo/' + item.id">
-        <div class="textStyle zag"><div>Заголовок:</div> <div> {{item.title}}</div></div>
-        <div class="textStyle status"><div>Статус:</div> <div>{{item.completed ? 'Выполнено' : 'Не выполнено'}}</div></div>
-        <div class="textStyle dedline"><div>Дедлайн:</div> <div>{{item.line | date: 'dd.MM.yyyy'}}</div></div>
+  <div class="ww" *ngIf="store.books()">
+    <div class="main" *ngFor="let item of store.books()">
+      <a class="info" [routerLink]="'/repo/' + item.id">
+        <div class="textStyle zag">
+          <div>Заголовок:</div>
+          <div>{{ item.title }}</div>
+        </div>
+        <div class="textStyle status">
+          <div>Статус:</div>
+          <div>{{ item.completed ? "Выполнено" : "Не выполнено" }}</div>
+        </div>
+        <div class="textStyle dedline">
+          <div>Дедлайн:</div>
+          <div>{{ item.line | date : "dd.MM.yyyy" }}</div>
+        </div>
       </a>
-      <button (click)="deleteTask(item.id)" class="btn">Удалить</button>
+      <img (click)="deleteTask(item.id)" class="image" src="https://www.svgrepo.com/show/464640/delete-alt.svg"/>
     </div>
   </div>
-  <!-- <div>{{store.filter()}}</div> -->
 </div>
