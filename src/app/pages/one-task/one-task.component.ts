@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { ProductsService } from '../services/products.service';
+import { ProductsService } from '../../services/products.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { CommonModule } from '@angular/common';
@@ -11,24 +11,13 @@ import { DatePipe } from '@angular/common';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { BooksStore } from '../store/items.store';
+import { BooksStore } from '../../store/items.store';
+import { infoType, selectType } from '../../../types';
 
-export type infoType = {
-  title: string;
-  description: string;
-  completed: boolean;
-  line: string;
-  people: string;
-  id: number;
-  priority: string;
-};
-export type selectType = {
-  name: string;
-  code: string;
-};
+
 
 @Component({
-  selector: 'app-repo',
+  selector: 'app-one-task',
   standalone: true,
   imports: [
     ProgressSpinnerModule,
@@ -42,10 +31,10 @@ export type selectType = {
     FormsModule,
     RouterModule,
   ],
-  templateUrl: './repo.component.html',
-  styleUrl: './repo.component.scss',
+  templateUrl: './one-task.component.html',
+  styleUrl: './one-task.component.scss',
 })
-export class RepoComponent {
+export class OneTaskComponent {
   // data
   listStatus = [
     { name: 'Выполнен', code: true },
@@ -140,7 +129,7 @@ export class RepoComponent {
   }
 
   ngOnInit() {
-    // Получение данных по конкретной тасук
+    // Получение данных по конкретной таске
     this.activateRoute.params.subscribe((params) => {
       this.fetchProducts(params['name']);
     });

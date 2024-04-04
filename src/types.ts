@@ -52,3 +52,35 @@ export interface PaginationParams {
   page: number;
   perPage: number;
 }
+
+
+
+export type infoType = {
+  title: string;
+  description: string;
+  completed: boolean;
+  line: string;
+  people: string;
+  id: number;
+  priority: string;
+};
+export type selectType = {
+  name: string;
+  code: string;
+};
+
+export type dataType = {
+  title: string
+  description: string
+  completed: boolean
+  line: string
+  people: string
+  priority: string
+  id: number
+}
+
+export type init = {
+  books: dataType[];
+  isLoading: boolean;
+  filter: string;
+};

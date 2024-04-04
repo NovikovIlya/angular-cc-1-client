@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { RepoComponent } from './repo/repo.component';
+import { HomeComponent } from './pages/home/home.component';
+import { OneTaskComponent } from './pages/one-task/one-task.component';
 
 
 export const routes: Routes = [
@@ -10,6 +10,6 @@ export const routes: Routes = [
   },
   {
     path: 'task/:name',
-    component: RepoComponent,
+    component: OneTaskComponent,
   }
 ];

@@ -19,7 +19,16 @@
               <div class="text3">{{ info.people }}</div>
             </div>
             <div class="starts">
-              <img class="images" [src]="info.priority  === 'middle' ? 'https://www.svgrepo.com/show/335284/status-lagging.svg' : info.priority === 'low' ? 'https://www.svgrepo.com/show/335281/status-connected.svg' : 'https://www.svgrepo.com/show/335283/status-disconnected.svg'" />
+              <img
+                class="images"
+                [src]="
+                  info.priority === 'middle'
+                    ? 'https://www.svgrepo.com/show/335284/status-lagging.svg'
+                    : info.priority === 'low'
+                    ? 'https://www.svgrepo.com/show/335281/status-connected.svg'
+                    : 'https://www.svgrepo.com/show/335283/status-disconnected.svg'
+                "
+              />
               <div class="textColor">
                 {{
                   info.priority === "middle"
@@ -40,8 +49,10 @@
               Статус: {{ info.completed ? "Выполнено" : "Не выполнено" }}
             </div>
           </div>
-          <div class="text3">Дедлайн: {{ info.line | date : "dd.MM.yyyy" }}</div>
-  
+          <div class="text3">
+            Дедлайн: {{ info.line | date : "dd.MM.yyyy" }}
+          </div>
+
           <button
             class="btn"
             (click)="showModalDialog()"
@@ -111,17 +122,18 @@
                 [showClear]="true"
                 placeholder="Приоритет"
               ></p-dropdown>
-
-              
             </div>
             <div class="stat">
-              <p-dropdown
-                [options]="listStatus"
-                [(ngModel)]="status"
-                optionLabel="name"
-                [showClear]="true"
-                placeholder="Статус"
-              ></p-dropdown>
+              <span class="p-float-label">
+                <p-dropdown
+                  [options]="listStatus"
+                  [(ngModel)]="status"
+                  optionLabel="name"
+                  [showClear]="true"
+                  placeholder="Статус"
+                ></p-dropdown>
+                <label for="birth_date">Статус</label>
+              </span>
             </div>
           </div>
           <button class="btn" (click)="setData(info.id)">Изменить</button>

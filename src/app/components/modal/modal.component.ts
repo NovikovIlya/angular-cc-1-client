@@ -11,15 +11,11 @@ import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { DatePipe } from '@angular/common';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { selectType } from '../../../types';
 
-
-export type selectType = {
-  name: string;
-  code: string;
-};
 
 @Component({
-  selector: 'app-header',
+  selector: 'app-modal',
   standalone: true,
   imports: [
     RouterModule,
@@ -32,10 +28,10 @@ export type selectType = {
     DatePipe,
     InputTextareaModule,
   ],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.scss',
+  templateUrl: './modal.component.html',
+  styleUrl: './modal.component.scss',
 })
-export class HeaderComponent {
+export class ModalComponent {
   constructor(private apiService: ApiService, private http: HttpClient) {}
   readonly store = inject(BooksStore);
   

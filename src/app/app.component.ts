@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule, NgClass } from '@angular/common';
 import { RouterModule, RouterOutlet } from '@angular/router';
-import { HeaderComponent } from './layout/header/header.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, HeaderComponent,NgClass,RouterModule],
+  imports: [CommonModule, RouterOutlet, ModalComponent,NgClass,RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

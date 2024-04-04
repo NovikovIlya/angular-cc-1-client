@@ -7,22 +7,9 @@ import {
 } from '@ngrx/signals';
 import { ProductsService } from '../services/products.service';
 import { inject } from '@angular/core';
+import { dataType, init } from '../../types';
 
-export type dataType = {
-  title: string
-  description: string
-  completed: boolean
-  line: string
-  people: string
-  priority: string
-  id: number
-}
 
-export type init = {
-  books: dataType[];
-  isLoading: boolean;
-  filter: string;
-};
 const initialState: init = {
   books: [],
   isLoading: false,

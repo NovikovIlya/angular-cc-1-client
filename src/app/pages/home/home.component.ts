@@ -1,11 +1,11 @@
-import { Component, effect, inject, signal } from '@angular/core';
-import { ProductsService } from '../services/products.service';
+import { Component, inject } from '@angular/core';
+import { ProductsService } from '../../services/products.service';
 import { CommonModule } from '@angular/common';
-import { ApiService } from '../services/api.service';
-import { BooksStore } from '../store/items.store';
+import { ApiService } from '../../services/api.service';
+import { BooksStore } from '../../store/items.store';
 import { RouterModule } from '@angular/router';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { HeaderComponent } from '../layout/header/header.component';
+import { ModalComponent } from '../../components/modal/modal.component';
 import { HttpClient } from '@angular/common/http';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
@@ -14,10 +14,6 @@ import { DatePipe } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 
-export type selectType = {
-  name: string;
-  code: string;
-};
 
 @Component({
   selector: 'app-home',
@@ -28,7 +24,7 @@ export type selectType = {
     CommonModule,
     RouterModule,
     ProgressSpinnerModule,
-    HeaderComponent,
+    ModalComponent,
     DropdownModule,
     FormsModule,
     DatePipe,
